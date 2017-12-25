@@ -12,12 +12,16 @@ public class jiemian {
 
 	static int x=1;
 	static JFrame frm = new JFrame();
+	
+	static int[][][]data= {{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},{{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}},{{0,0,0,0}}};
 
 	public static void main(String[] args) {
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		frm.setTitle("请选择要进行的问卷:");
 		BorderLayout borderlayout=new BorderLayout();
 		frm.setLayout(borderlayout);
+		Image icon = Toolkit.getDefaultToolkit().getImage("picture.png");
+		frm.setIconImage(icon);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		JLabel label = new JLabel("请选择要进行的问卷:");
 		label.setBounds(-30,5,230,30);
@@ -32,7 +36,7 @@ public class jiemian {
 		JPanel bottomPanel=new JPanel();
 		frm.getContentPane().add(bottomPanel,BorderLayout.EAST);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		String[] likes={"问卷1：十九大开幕问卷调查","问卷2：上海理工大学百十华诞知多少","问卷3：社会主义核心价值观考察","问卷4：如何学好java？","问卷5：上海理工大学最美教师评选","问卷6：上海理工大学空调问题问卷调查"};
+		String[] likes={"问卷1：十九大开幕问卷调查","问卷2：上海理工大学百十华诞知多少","问卷3：上海理工大学空调问题问卷调查","问卷4：如何学好java？","问卷5：上海理工大学最美教师评选"};
 		JList list=new JList(likes);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		JComboBox comboBox=new JComboBox(likes);
@@ -73,17 +77,17 @@ public class jiemian {
 		btn2.addActionListener(btnHandler2); 	
 		topPanel.add(btn2);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		JButton btn3 = new JButton("添加新问卷");
+		JButton btn3 = new JButton("重置信息");
 		ButtonHandler3 btnHandler3 = new ButtonHandler3();
 		btn3.addActionListener(btnHandler3); 	
 		topPanel.add(btn3);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		JButton btn4 = new JButton("刷新问卷信息");
+		JButton btn4 = new JButton("退出问卷系统");
 		ButtonHandler4 btnHandler4 = new ButtonHandler4();
 		btn4.addActionListener(btnHandler4); 	
 		topPanel.add(btn4);
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-		frm.setBounds(650, 430, 758, 75);
+		frm.setBounds(650, 430, 742, 75);
 		frm.setVisible(true);
 	}
 }
@@ -100,7 +104,6 @@ class ButtonHandler1 implements ActionListener {
 		case 3:{wenjuan3.wenjuanneirong();break;}
 		case 4:{wenjuan4.wenjuanneirong();break;}
 		case 5:{wenjuan5.wenjuanneirong();break;}
-		case 6:{wenjuan6.wenjuanneirong();break;}
 		default:System.out.println("Choosen Error!");
 		}
 		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,17 +111,35 @@ class ButtonHandler1 implements ActionListener {
 }
 class ButtonHandler2 implements ActionListener {
 	public void actionPerformed(ActionEvent btn2) {
-		System.out.println("发生了单击时间2");
+		switch (jiemian.x)
+		{
+		case 1:{wenjuan1.shujutongji();break;}
+		case 2:{wenjuan2.shujutongji();break;}
+		case 3:{wenjuan3.shujutongji();break;}
+		case 4:{wenjuan4.shujutongji();break;}
+		case 5:{wenjuan5.shujutongji();break;}
+		
 	}
+}
 }
 class ButtonHandler3 implements ActionListener {
 	public void actionPerformed(ActionEvent btn3) {
-		System.out.println("发生了单击时间3");
+		int i,j,k;
+		for(i=0;i<5;i++)
+		{
+			for(j=0;j<6;j++)
+			{
+				for(k=0;k<4;k++)
+				{
+					jiemian.data[i][j][k]=0;
+				}
+			}
+		}
 	}
 }
 class ButtonHandler4 implements ActionListener {
 	public void actionPerformed(ActionEvent btn4) {
-		System.out.println("发生了单击时间4");
+		jiemian.frm.dispose();
 	}
 }
 class ComboBoxListener implements ActionListener {
